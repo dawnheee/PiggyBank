@@ -3,10 +3,16 @@
 const Form = ({ setHapList }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const title = event.target[0].value;
-    const content = event.target[1].value;
+    let title = event.target[0].value;
+    let content = event.target[1].value;
 
-    // setHapList(여기에 새로운 객체 넣어주기!!);
+    setHapList({
+      title: title,
+      content: content,
+    });
+
+    event.target[0].value = "";
+    event.target[1].value = "";
   };
 
   return (
