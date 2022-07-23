@@ -1,15 +1,21 @@
 import Form from "./components/Form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
   const [hapList, setHapList] = useState([]);
-  console.log(hapList); // {title: 'ㅇ', content: 'ㅇ'} 잘 가져와짐. 이제 hapList 객체를 기존 배열에 추가해야함
+  console.log(hapList); // 기존 배열에 새 데이터 추가 성공 !
 
-  //Form 에서 생성된 새로운 Hap 데이터를 읽어오고,(핸들러 함수. Form에서 직접 함. 그걸 받아오는 state 필요) //없어도 될듯
-  // 기존 데이터에 추가하는 state
-  // 나중에 다른 컴포넌트로 보내줘야 한다.
+  const addHappHandler = (hap) => {
+    setHapList((prevHap) => {
+      return [hap, ...prevHap];
+    });
+  };
 
-  return <Form setHapList={setHapList} />;
+  //데이터 추가하는 함수를 만들어 form으로 내려준다.
+  //하위 컴포넌트에서는 해당 데이터가 만들어지면 일어나는 작업을 하고, 데이터 정제해서 함수의 인수로 보낸다.
+  //이 컴포넌트의 add 핸들러 함수에서는 그걸 받아서 기존 배열에 추가해준다.
+
+  return <Form onAddHap={addHappHandler} />;
 }
 
 export default App;

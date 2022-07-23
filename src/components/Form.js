@@ -1,17 +1,18 @@
 // import React, { useState } from "react";
 
-const Form = ({ setHapList }) => {
+const Form = ({ onAddHap }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    let title = event.target[0].value;
-    let content = event.target[1].value;
 
-    setHapList({
-      title: title,
-      content: content,
-    });
+    const hap = {
+      // 새로운 hap 데이터 만들기
+      title: event.target[0].value,
+      content: event.target[1].value,
+      date: new Date().toLocaleDateString(), //
+    };
 
-    event.target[0].value = "";
+    onAddHap(hap); //hap을 App 컴포넌트로 보내줌
+    event.target[0].value = ""; // 인풋 비워줌
     event.target[1].value = "";
   };
 
